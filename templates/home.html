@@ -54,18 +54,22 @@
 
     <div id="newcrimeform">
         <h2>Submit New Crime</h2>
+        {% if error_message %}
+            <div id="error"><p>{{error_message}}</p></div>
+        {% endif %}
         <form action="/submitcrime" method="POST">
             <label for="category">Category</label>
             <select name="category" id="category">
-                <option value="mugging">Mugging</option>
-                <option value="breakin">Break-in</option>
+                {% for category in categories %}
+                    <option value="{{category}}">{{category}}</option>
+                {% endfor %}
             </select>
             <label for="date">Date</label>
             <input type="date" name="date" id="date">
             <label for="latitude">Latitude</label>
-            <input type="text" name="latitude" id="latitude">
+            <input type="text" name="latitude" id="latitude" readonly>
             <label for="longitude">Longitude</label>
-            <input type="text" name="longitude" id="longitude">
+            <input type="text" name="longitude" id="longitude" readonly>
             <label for="description">Description</label>
             <textarea name="description" id="description" placeholder="A brief but detailed description of the crime"></textarea>
             <input type="submit" value="Submit">
