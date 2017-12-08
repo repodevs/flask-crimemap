@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
-from dbhelper import DBHelper
+import db_config
 from flask import Flask
 from flask import render_template
 from flask import request
+
+if db_config.test:
+    from mockdbhelper import MockDBHelper as DBHelper
+else:
+    from dbhelper import DBHelper
 
 
 app = Flask(__name__)
