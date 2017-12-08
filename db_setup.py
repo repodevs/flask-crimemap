@@ -2,10 +2,10 @@
 import pymysql
 import db_config
 
+
 connection = pymysql.connect(host='localhost',
                              user=db_config.db_user,
                              password=db_config.db_password)
-
 
 try:
     with connection.cursor() as cursor:
