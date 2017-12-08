@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js">
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqMQ3-ZR4in74m7JAN-mvStI3EfvEFnh4">
     </script>
 
     <script type="text/javascript">
@@ -18,6 +18,19 @@
                 function(event){
                     placeMarker(event.latLng);
                 });
+            placeCrimes({{ crimes | safe }});
+        }
+
+        function placeCrimes(crimes) {
+            for (i=0; i<crimes.length; i++) {
+                crime = new google.maps.Marker({
+                    position: new google.maps.LatLng(crimes[i].latitude, crimes[i].longitude),
+                    map: map,
+                    title: crimes[i].date + "\n" +
+                        crimes[i].category + "\n" +
+                        crimes[i].description
+                });
+            }
         }
 
         function placeMarker(location) {
